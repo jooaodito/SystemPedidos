@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SystemPedidoAgoraVai.Models.Item>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cadastro Itens</h2>
+
+<p>
+    @Html.ActionLink("Novo Item", "Create", new { area = "" }, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Preco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descricao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Preco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantidade)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdItem }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Detailhes", "Details", new { id=item.IdItem }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Deletar", "Delete", new { id=item.IdItem }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>

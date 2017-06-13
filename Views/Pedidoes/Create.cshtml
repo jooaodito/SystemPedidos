@@ -1,0 +1,112 @@
+﻿@model SystemPedidoAgoraVai.Models.Pedido
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Novo Pedido</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" class="form-control text-box single-line" value="@DateTime.Now.ToString()" id="DataPedido" />
+                @Html.ValidationMessageFor(model => model.DataPedido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClienteId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Cliente" name ="EscolhaCliente" class="form-control">
+                    @foreach (var item in ViewBag.Clientes)
+                    {
+                        <option value="@item.IdCliente">@item.NomeCliente</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ItemId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" class="form-control text-box single-line" disabled value="Cod. Item" id="Item" name="resultado" />
+            </div>
+        </div>
+
+        <h3><label class="control-label">Tabela de Itens</label></h3>
+        <br />
+        <table class="table col-md-2">
+            <tr>
+                <th>
+                    <label class="control-label"> Cod.Item</label>
+                </th>
+                <th>
+                    <label class="control-label"> Nome do Item</label>
+                </th>
+                <th>
+                    <label class="control-label"> Descrição</label>
+                </th>
+                <th>
+                    <label class="control-label"> Preço</label>
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in ViewBag.Items)
+                {
+                <tr>
+                    <td>
+                        <label value="@item.IdItem">@item.IdItem</label>
+                    </td>
+                    <td>
+                        <label value="@item.NomeItem">@item.NomeItem</label>
+                    </td>
+                    <td>
+                        <label value="@item.Descricao">@item.Descricao</label>
+                    </td>
+                    <td>
+                        <label value="@item.Preco">@item.Preco</label>
+                    </td>
+                    <td>
+                        <a name="botao" class="btn btn-success btnAdd" data-codigo="@item.IdItem" data-total="@item.Preco" href="#">Adicionar</a>
+                        
+                    </td>
+                </tr>
+            }
+        </table>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalPedido, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="text" class="form-control text-box single-line" disabled value="Total Pedido" id="TotalPedido" name="resultado" />
+                @Html.ValidationMessageFor(model => model.TotalPedido, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <a href="#" onclick="SalvarPedido();" class="btn btn-default">Salvar Pedido</a>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para Lista", "Index", new { area = "" }, new { @class = "btn btn-default" })
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/Pedidos.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SystemPedidoAgoraVai.Models.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cadastro de Clientes</h2>
+
+<p>
+    @Html.ActionLink("Novo Cliente", "Create", new { area = "" }, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeCliente)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cpf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailCliente)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cpf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailCliente)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdCliente }, new {@class = "btn btn-default" })
+            @Html.ActionLink("Detalhes", "Details", new { id=item.IdCliente }, new { @class = "btn btn-default" })
+            @Html.ActionLink("Deletar", "Delete", new { id=item.IdCliente }, new { @class = "btn btn-default" })
+        </td>
+    </tr>
+}
+
+</table>
